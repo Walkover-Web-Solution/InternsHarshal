@@ -70,14 +70,15 @@ const styles = StyleSheet.create({
         marginBottom: 50
     },
     inputContainer: {
-        justifyContent: 'flex-start',
+        justifyContent:'center',
         alignItems: 'center',
         flex: 1,
         width: '100%'
     },
     add: {
         height: '15%',
-        elevation:10
+        elevation:10,
+        marginBottom:30
     },
     addTextStyle:{
         elevation:10

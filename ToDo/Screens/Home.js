@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { ScrollView, TouchableOpacity } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import TodoDisplay from '../components/TodoDisplay';
+import * as TodoActions from '../store/actions/todoActions';
 
 const Home = (prop) => {
+    
+    const dispatch = useDispatch();
 
     const data = useSelector((state) => state.todo);
 
@@ -38,13 +41,13 @@ const Home = (prop) => {
                    data[i].isMissed = true;
                }
            }
-           console.log(data[i]);
         }
     }
 
     useEffect(() =>{
+        dispatch(TodoActions.fetchTodo(dispatch));
         checkMissings();
-    },[data]);
+    },[dispatch]);
 
     return (
             <ScrollView>

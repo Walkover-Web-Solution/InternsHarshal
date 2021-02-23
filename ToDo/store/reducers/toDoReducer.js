@@ -1,19 +1,19 @@
-import todoData from '../../data/todoData';
 import Todo from '../../models/todo';
-import { ADD_TODO, SAVE_TODO } from '../actions/todoActions';
+import { ADD_TODO, SAVE_TODO, SET_TODO } from '../actions/todoActions';
 
 
 const intialState = {
-    todo: todoData,
+    todo: [],
     login: {
-        email: 'Walkover@gmail.com',
-        pass: '12345'
-    },
-    idTracker: todoData.length
+        email: '',
+        pass: ''
+    }
 }
 
 const todoReducer = (state = intialState, action) => {
     switch (action.type) {
+        case SET_TODO:
+            return {...state, todo:action.todo};
         case SAVE_TODO:
             const newElement = new Todo(
                 action.data.id,
@@ -29,9 +29,8 @@ const todoReducer = (state = intialState, action) => {
             return { ...state, todo: newTodoData};
 
         case ADD_TODO:
-            let id = state.idTracker + 1;
             const newTodo = new Todo(
-                id.toString(),
+                10,
                 action.data.title,
                 action.data.work,
                 action.data.time,
@@ -39,7 +38,7 @@ const todoReducer = (state = intialState, action) => {
                 action.data.isMissed
             );
             const updatedTodoData = [newTodo, ...state.todo];
-            return { ...state, todo: updatedTodoData, idTracker: id };
+            return { ...state, todo: updatedTodoData };
         default:
             return state;
     }
